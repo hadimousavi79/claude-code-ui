@@ -14,7 +14,7 @@ By [21st.dev](https://21st.dev) team
 
 Run agents locally, in worktrees, in background — without touching main branch.
 
-![Worktree Demo](apps/desktop/assets/worktree.gif)
+![Worktree Demo](assets/worktree.gif)
 
 - **Git Worktree Isolation** - Each chat session runs in its own isolated worktree
 - **Background Execution** - Run agents in background while you continue working
@@ -27,7 +27,7 @@ Run agents locally, in worktrees, in background — without touching main branch
 
 Cursor-like UI for Claude Code with diff previews, built-in git client, and the ability to see changes before they land.
 
-![Cursor UI Demo](apps/desktop/assets/cursor-ui.gif)
+![Cursor UI Demo](assets/cursor-ui.gif)
 
 - **Diff Previews** - See exactly what changes Claude is making in real-time
 - **Built-in Git Client** - Stage, commit, and manage branches without leaving the app
@@ -40,7 +40,7 @@ Cursor-like UI for Claude Code with diff previews, built-in git client, and the 
 
 Claude asks clarifying questions, builds structured plans, and shows clean markdown preview — all before execution.
 
-![Plan Mode Demo](apps/desktop/assets/plan-mode.gif)
+![Plan Mode Demo](assets/plan-mode.gif)
 
 - **Clarifying Questions** - Claude asks what it needs to know before starting
 - **Structured Plans** - See step-by-step breakdown of what will happen
