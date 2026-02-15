@@ -282,6 +282,7 @@ export const chatsRouter = router({
       z.object({
         projectId: z.string(),
         name: z.string().optional(),
+        model: z.string().optional(),
         initialMessage: z.string().optional(),
         initialMessageParts: z
           .array(
@@ -328,7 +329,10 @@ export const chatsRouter = router({
       // Create chat (fast path)
       const chat = db
         .insert(chats)
-        .values({ name: input.name, projectId: input.projectId })
+        .values({
+          name: input.name,
+          projectId: input.projectId,
+        })
         .returning()
         .get()
       console.log("[chats.create] created chat:", chat)
@@ -336,6 +340,7 @@ export const chatsRouter = router({
       // Create initial sub-chat with user message (AI SDK format)
       // If initialMessageParts is provided, use it; otherwise fallback to text-only message
       let initialMessages = "[]"
+      const initialMetadata = input.model ? { model: input.model } : undefined
 
       if (input.initialMessageParts && input.initialMessageParts.length > 0) {
         initialMessages = JSON.stringify([
@@ -343,6 +348,7 @@ export const chatsRouter = router({
             id: `msg-${Date.now()}`,
             role: "user",
             parts: input.initialMessageParts,
+            ...(initialMetadata ? { metadata: initialMetadata } : {}),
           },
         ])
       } else if (input.initialMessage) {
@@ -351,6 +357,7 @@ export const chatsRouter = router({
             id: `msg-${Date.now()}`,
             role: "user",
             parts: [{ type: "text", text: input.initialMessage }],
+            ...(initialMetadata ? { metadata: initialMetadata } : {}),
           },
         ])
       }

@@ -207,7 +207,7 @@ function registerIpcHandlers(): void {
   })
 
   // New window - optionally open with specific chat/subchat
-  ipcMain.handle("window:new", (_event, options?: { chatId?: string; subChatId?: string; splitPaneIds?: string[] }) => {
+  ipcMain.handle("window:new", (_event, options?: { chatId?: string; subChatId?: string }) => {
     createWindow(options)
   })
 
@@ -573,7 +573,7 @@ function getUseNativeFramePreference(): boolean {
  * @param options.chatId Open this chat in the new window
  * @param options.subChatId Open this sub-chat in the new window
  */
-export function createWindow(options?: { chatId?: string; subChatId?: string; splitPaneIds?: string[] }): BrowserWindow {
+export function createWindow(options?: { chatId?: string; subChatId?: string }): BrowserWindow {
   // Register IPC handlers before creating first window
   registerIpcHandlers()
 
@@ -708,7 +708,6 @@ export function createWindow(options?: { chatId?: string; subChatId?: string; sp
       params.set("windowId", windowId)
       if (options?.chatId) params.set("chatId", options.chatId)
       if (options?.subChatId) params.set("subChatId", options.subChatId)
-      if (options?.splitPaneIds) params.set("splitPaneIds", JSON.stringify(options.splitPaneIds))
     }
 
     if (devServerUrl) {
